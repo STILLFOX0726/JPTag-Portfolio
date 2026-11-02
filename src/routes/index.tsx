@@ -272,7 +272,7 @@ function Index() {
             {work.map((w, i) => (
               <article
                 key={w.t}
-                className="reveal glass group flex flex-col rounded-3xl p-6 transition duration-500 hover:-translate-y-2"
+                className="reveal glass group relative flex flex-col rounded-3xl p-6 transition duration-500 hover:-translate-y-2"
                 style={{ transitionDelay: `${i * 120}ms` }}
               >
                 {w.art && <w.art className="-mx-6 -mt-6 mb-6 h-72 rounded-t-3xl" />}
@@ -300,7 +300,8 @@ function Index() {
                   href={w.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-primary"
+                  aria-label={`View ${w.t}`}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-primary after:absolute after:inset-0 after:rounded-3xl"
                 >
                   View concept <ArrowUpRight className="h-4 w-4 transition group-hover:rotate-45" />
                 </a>
