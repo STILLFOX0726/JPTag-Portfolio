@@ -1,0 +1,4 @@
+- [x] Add an email message form using the supplied contact address.
+- [x] Add a neighboring GitHub contribution calendar using the supplied profile.
+- [x] Verify the contact form and contribution calendar in the preview.
+- [x] Add and verify GitHub date-range filters with presets, past years and custom dates.
