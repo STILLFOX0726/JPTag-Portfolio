@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { CityGrass } from "@/components/city-grass";
 import { ContactPanels } from "@/components/contact-panels";
 import { OptiScamShield } from "@/components/optiscam-shield";
+import { ZypherCodeMark } from "@/components/zyphercode-mark";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -15,7 +16,6 @@ import {
   Database,
   Code2,
   ShieldCheck,
-  Award,
   Github,
   Linkedin,
   Mail,
@@ -93,11 +93,11 @@ const work = [
     href: "https://optiscam-research.vercel.app",
   },
   {
-    icon: BrainCircuit,
-    cat: "Machine Learning",
-    t: "Predictive Churn Model",
-    d: "Flags at-risk customers early so teams can act before they leave.",
-    tags: ["Python", "ML", "Prediction"],
+    icon: Code2,
+    t: "ZypherCode",
+    art: ZypherCodeMark,
+    d: "ZypherCode is a browser-based IDE and compiler for a Gen Z slang programming language. Write programs with keywords like numfr, lowkey and spill, then compile and run them to see the output and every token the compiler produces.",
+    tags: ["Compiler", "Web IDE", "Gen Z Syntax"],
     href: "https://zyphercode.vercel.app/",
   },
   {
@@ -133,6 +133,46 @@ const toolkit = [
   },
 ];
 
+// Placeholders in [brackets] are waiting for real details.
+const credentials = [
+  {
+    label: "Education",
+    items: [
+      {
+        t: "BS Computer Science, Software Engineering",
+        sub: "[University name]",
+        date: "[Year]",
+      },
+    ],
+  },
+  {
+    label: "Certification",
+    items: [
+      {
+        t: "Project Management Institute",
+        sub: "Certiport - A Pearson VUE Business",
+        date: "Issued Mar 2026 · Expires Mar 2031",
+      },
+      {
+        t: "Information Specialist Python",
+        sub: "Certiport - A Pearson VUE Business",
+        date: "Issued Jul 2025 · Expires Jul 2030",
+      },
+      {
+        t: "National Certificate II in Computer Systems Servicing",
+        sub: "TESDA",
+        date: "Issued May 26, 2023 · Valid until May 25, 2028",
+        verify:
+          "https://t2mis.tesda.gov.ph/Learners/S/340062002F00580077004F00690051002F00680055003000460051006D007A006C005A007300570070004A007600420071006D0042004B006700450054007A006F00540048004800580052006B0057006D00380063003D00",
+      },
+    ],
+  },
+  {
+    label: "Language",
+    items: [{ t: "[Language]", sub: "[Proficiency]", date: "" }],
+  },
+];
+
 function Index() {
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -161,10 +201,10 @@ function Index() {
               About
             </a>
             <a
-              href="#toolkit"
+              href="#credentials"
               className="link-underline hidden text-muted-foreground hover:text-foreground sm:inline"
             >
-              Toolkit
+              Credentials
             </a>
             <a
               href="#contact"
@@ -332,53 +372,75 @@ function Index() {
         </div>
       </section>
 
-      {/* Toolkit */}
-      <section id="toolkit" className="scroll-mt-24 px-4 py-20 md:px-8">
+      {/* Credentials */}
+      <section id="credentials" className="scroll-mt-24 px-4 py-20 md:px-8">
         <div className="mx-auto max-w-6xl">
-          <p className="reveal mb-2 text-sm font-medium uppercase tracking-widest text-primary">
-            Toolkit
-          </p>
-          <h2 className="reveal mb-12 text-3xl font-semibold md:text-5xl">What I work with</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {toolkit.map((k, i) => (
-              <div
-                key={k.t}
-                className="reveal glass rounded-2xl p-6 transition hover:-translate-y-1"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <k.icon className="mb-4 h-6 w-6 text-primary" />
-                <h3 className="mb-4 font-semibold">{k.t}</h3>
-                <ul className="flex flex-wrap gap-2">
-                  {k.s.map((s) => (
-                    <li
-                      key={s}
-                      className="rounded-full border px-3 py-1 text-xs transition hover:bg-primary hover:text-primary-foreground"
-                    >
-                      {s}
-                    </li>
+          <h2 className="reveal mb-12 font-display text-3xl font-semibold uppercase tracking-[0.18em] md:text-5xl">
+            Credentials
+          </h2>
+          {[credentials[0]!, "skills" as const, ...credentials.slice(1)].map((c, i) => (
+            <div
+              key={c === "skills" ? c : c.label}
+              className="reveal grid gap-4 border-t py-8 md:grid-cols-[14rem_1fr] md:gap-10 md:py-10"
+              style={{ transitionDelay: `${i * 80}ms` }}
+            >
+              <h3 className="font-display text-lg uppercase tracking-[0.2em] text-muted-foreground md:text-xl">
+                {c === "skills" ? "Skills" : c.label}
+              </h3>
+              {c === "skills" ? (
+                <div className="space-y-5">
+                  {toolkit.map((k) => (
+                    <div key={k.t} className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="mr-2 inline-flex w-full items-center gap-2 text-sm font-semibold sm:w-56">
+                        <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary">
+                          <k.icon className="h-4 w-4 text-primary" />
+                        </span>
+                        {k.t}
+                      </span>
+                      {k.s.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground transition hover:bg-primary hover:text-primary-foreground"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certification */}
-      <section className="px-4 py-12 md:px-8">
-        <div className="reveal mx-auto flex max-w-6xl flex-col items-center gap-6 rounded-3xl border-2 border-dashed border-primary/30 p-8 text-center md:flex-row md:text-left">
-          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-secondary animate-float">
-            <Award className="h-7 w-7 text-primary" />
-          </span>
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold">Professional certification — coming soon</h3>
-            <p className="text-sm text-muted-foreground">
-              Currently working toward a new credential in data and AI. This spot is saved for it.
-            </p>
-          </div>
-          <span className="rounded-full bg-secondary px-4 py-2 text-xs font-medium text-secondary-foreground">
-            In progress
-          </span>
+                </div>
+              ) : (
+                <div className="divide-y">
+                  {c.items.map((it) => (
+                    <div
+                      key={it.t}
+                      className="flex flex-col gap-1 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                    >
+                      <div>
+                        <p className="text-lg font-medium">{it.t}</p>
+                        {it.sub && <p className="text-sm text-muted-foreground">{it.sub}</p>}
+                        {"verify" in it && (
+                          <a
+                            href={it.verify}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-flex items-center gap-1 rounded-full border border-primary/30 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
+                          >
+                            Verify <ArrowUpRight className="h-3.5 w-3.5" />
+                          </a>
+                        )}
+                      </div>
+                      {it.date && (
+                        <span className="shrink-0 font-mono text-xs tracking-wider text-muted-foreground">
+                          {it.date}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <div className="border-t" />
         </div>
       </section>
 
